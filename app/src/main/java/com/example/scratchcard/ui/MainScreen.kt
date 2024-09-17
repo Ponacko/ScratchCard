@@ -1,8 +1,5 @@
 package com.example.scratchcard.ui
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,27 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.scratchcard.model.ScratchCardState
-
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            ScratchCardApp()
-        }
-    }
-}
-
-@Composable
-fun ScratchCardApp(viewModel: MainViewModel = viewModel()) {
-    // Main Screen UI
-    MainScreen(
-        scratchCardState = viewModel.scratchCard.state,
-        onScratchClick = { /* Navigate to Scratch Screen */ },
-        onActivateClick = { /* Navigate to Activation Screen */ }
-    )
-}
 
 @Composable
 fun MainScreen(
