@@ -7,14 +7,19 @@ import androidx.navigation.compose.rememberNavController
 import com.example.scratchcard.ui.ActivationScreen
 import com.example.scratchcard.ui.MainScreen
 import com.example.scratchcard.ui.ScratchScreen
-import com.example.scratchcard.ui.ScratchViewModel
+import com.example.scratchcard.viewmodel.ActivationViewModel
+import com.example.scratchcard.viewmodel.ScratchViewModel
 import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
-fun ScratchCardApp(viewModel: ScratchViewModel = koinViewModel()) {
+fun ScratchCardApp(
+    viewModel: ScratchViewModel = koinViewModel(),
+    activationViewModel: ActivationViewModel = koinViewModel()
+) {
 
     val navController = rememberNavController()
+
 
     NavHost(navController = navController, startDestination = NavigationDestinations.MAIN.route) {
         composable("main") {
@@ -33,10 +38,7 @@ fun ScratchCardApp(viewModel: ScratchViewModel = koinViewModel()) {
 
         composable(NavigationDestinations.ACTIVATE.route) {
             ActivationScreen(
-                onActivateCompleted = {
-                    // TODO activate card
-                    navController.popBackStack()
-                }
+                viewModel = activationViewModel,
             )
         }
     }
