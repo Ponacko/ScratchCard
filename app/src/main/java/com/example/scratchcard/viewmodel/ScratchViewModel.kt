@@ -1,4 +1,4 @@
-package com.example.scratchcard.ui
+package com.example.scratchcard.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -11,11 +11,10 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class ScratchViewModel(
+    val scratchCard: ScratchCard,
     private val cardScratcher: CodeScratcher
 ) : ViewModel() {
 
-    var scratchCard by mutableStateOf(ScratchCard())
-        private set
     var isScratching by mutableStateOf(false)
         private set
 
