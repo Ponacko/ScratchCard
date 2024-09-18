@@ -1,7 +1,5 @@
 package com.example.scratchcard.model
 
-import java.util.UUID
-
 class ScratchCard(
     private var _code: String = "",
     private var _state: ScratchCardState = ScratchCardState.UNSCRATCHED,
@@ -13,9 +11,9 @@ class ScratchCard(
     val state: ScratchCardState
         get() = _state
 
-    fun scratchCard() {
+    fun setCardScratched(code: String) {
         if (_state == ScratchCardState.UNSCRATCHED) {
-            _code = UUID.randomUUID().toString()
+            _code = code
             _state = ScratchCardState.SCRATCHED
         }
     }

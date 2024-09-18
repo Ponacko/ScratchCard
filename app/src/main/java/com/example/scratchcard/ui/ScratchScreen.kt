@@ -8,12 +8,25 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 
 @Composable
-fun ScratchScreen(onScratchCompleted: () -> Unit) {
+fun ScratchScreen(
+    viewModel: ScratchViewModel,
+    onScratchCompleted: () -> Unit
+) {
+    val scratchCard = viewModel.scratchCard
+    val isScratching = viewModel.isScratching
+
     Scaffold(
         content = { paddingValues ->
             Column(
@@ -23,8 +36,19 @@ fun ScratchScreen(onScratchCompleted: () -> Unit) {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Button(onClick = onScratchCompleted) {
-                    Text(text = "Scratch the Card")
+                Button(
+                    onClick = {
+                        if (!isScratching) {
+                            viewModel.scratch()
+                        }
+                    },
+                    enabled = !isScratching
+                ) {
+                    Text(text = if (isScratching) "Scratching..." else "Scratch the Card")
+                }
+
+                scratchCard.code.let {
+                    Text(text = "Scratched Code: $it", modifier = Modifier.padding(top = 16.dp))
                 }
             }
         }
