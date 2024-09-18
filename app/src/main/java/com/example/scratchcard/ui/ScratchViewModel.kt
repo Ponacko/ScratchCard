@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.scratchcard.model.CodeScratcher
 import com.example.scratchcard.model.ScratchCard
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class ScratchViewModel(
@@ -18,8 +19,12 @@ class ScratchViewModel(
     var isScratching by mutableStateOf(false)
         private set
 
+    private var scratchJob: Job? = null
+
     fun scratch() {
-        viewModelScope.launch {
+        scratchJob?.cancel()
+
+        scratchJob = viewModelScope.launch {
             isScratching = true
             try {
                 cardScratcher.scratch(scratchCard)
@@ -28,4 +33,14 @@ class ScratchViewModel(
             }
         }
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        cancelScratching()
+    }
+
+    fun cancelScratching() {
+        scratchJob?.cancel()
+    }
+
 }

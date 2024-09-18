@@ -8,6 +8,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -21,12 +22,17 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun ScratchScreen(
-    viewModel: ScratchViewModel,
-    onScratchCompleted: () -> Unit
+    viewModel: ScratchViewModel
 ) {
     val scratchCard = viewModel.scratchCard
     val isScratching = viewModel.isScratching
 
+
+    DisposableEffect(Unit) {
+        onDispose {
+            viewModel.cancelScratching()
+        }
+    }
     Scaffold(
         content = { paddingValues ->
             Column(
@@ -47,9 +53,7 @@ fun ScratchScreen(
                     Text(text = if (isScratching) "Scratching..." else "Scratch the Card")
                 }
 
-                scratchCard.code.let {
-                    Text(text = "Scratched Code: $it", modifier = Modifier.padding(top = 16.dp))
-                }
+                Text(text = "Scratched Code: ${scratchCard.code}", modifier = Modifier.padding(top = 16.dp))
             }
         }
     )
