@@ -11,7 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.scratchcard.R
 import com.example.scratchcard.viewmodel.ScratchViewModel
 
 
@@ -46,16 +48,21 @@ fun ScratchScreen(
                     },
                     enabled = !isScratching && canBeScratched
                 ) {
-                    Text(text = if (isScratching) {
-                        "Scratching..."
-                    } else if (canBeScratched){
-                        "Scratch the Card"
-                    } else {
-                        "Cannot scratch"
-                    })
+                    Text(
+                        text = if (isScratching) {
+                            stringResource(R.string.scratching)
+                        } else if (canBeScratched) {
+                            stringResource(R.string.scratch_the_card)
+                        } else {
+                            stringResource(R.string.cannot_scratch)
+                        }
+                    )
                 }
 
-                Text(text = "Scratched Code: ${scratchCard.code}", modifier = Modifier.padding(top = 16.dp))
+                Text(
+                    text = stringResource(R.string.scratched_code, scratchCard.code),
+                    modifier = Modifier.padding(top = 16.dp)
+                )
             }
         }
     )

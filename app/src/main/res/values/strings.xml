@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">ScratchCard</string>
+    <string name="scratch_the_card">Scratch the Card</string>
+    <string name="cannot_scratch">Cannot scratch</string>
+    <string name="scratching">Scratching...</string>
+    <string name="scratched_code">Scratched Code: %1$s</string>
+    <string name="go_to_scratch_screen">Go to Scratch Screen</string>
+    <string name="go_to_activation_screen">Go to Activation Screen</string>
+    <string name="activating">Activating...</string>
+    <string name="activate_the_card">Activate the Card</string>
+    <string name="cannot_activate">Cannot activate</string>
+    <string name="successfully_activated">Successfully activated</string>
+    <string name="activation_error">Activation Error</string>
+    <string name="ok">OK</string>
 </resources>
