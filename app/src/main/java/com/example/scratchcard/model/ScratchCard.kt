@@ -11,14 +11,14 @@ class ScratchCard(
     val state: ScratchCardState
         get() = _state
 
-    fun setCardScratched(code: String) {
+    fun setScratched(code: String) {
         if (_state == ScratchCardState.UNSCRATCHED) {
             _code = code
             _state = ScratchCardState.SCRATCHED
         }
     }
 
-    fun activateCard() {
+    fun setActivated() {
         if (_state == ScratchCardState.SCRATCHED) {
             _state = ScratchCardState.ACTIVATED
         }

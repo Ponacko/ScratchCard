@@ -20,6 +20,14 @@ class ActivationViewModel(
     var activationError by mutableStateOf<String?>(null)
         private set
 
+    var canBeActivated: Boolean
+        get() = codeActivator.canBeActivated(scratchCard)
+        private set(_) {}
+
+    var isAlreadyActivated: Boolean
+        get() = codeActivator.isAlreadyActivated(scratchCard)
+        private set(_) {}
+
     fun activate() {
         viewModelScope.launch {
             isActivating = true

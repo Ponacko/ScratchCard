@@ -10,6 +10,6 @@ class CodeScratcher {
         // Simulate a heavy operation with a 2-second delay
         delay(SCRATCH_DELAY_MS)
         val code = UUID.randomUUID().toString()
-        card.setCardScratched(code)
+        card.setScratched(code)
     }
 }
