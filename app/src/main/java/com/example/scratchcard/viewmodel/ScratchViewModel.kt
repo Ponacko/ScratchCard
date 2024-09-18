@@ -12,11 +12,15 @@ import kotlinx.coroutines.launch
 
 class ScratchViewModel(
     val scratchCard: ScratchCard,
-    private val cardScratcher: CodeScratcher
+    private val codeScratcher: CodeScratcher
 ) : ViewModel() {
 
     var isScratching by mutableStateOf(false)
         private set
+
+    var canBeScratched: Boolean
+        get() = codeScratcher.canBeScratched(scratchCard)
+        private set(_) {}
 
     private var scratchJob: Job? = null
 
@@ -26,7 +30,7 @@ class ScratchViewModel(
         scratchJob = viewModelScope.launch {
             isScratching = true
             try {
-                cardScratcher.scratch(scratchCard)
+                codeScratcher.scratch(scratchCard)
             } finally {
                 isScratching = false
             }

@@ -12,4 +12,7 @@ class CodeScratcher {
         val code = UUID.randomUUID().toString()
         card.setScratched(code)
     }
+
+    fun canBeScratched(scratchCard: ScratchCard) =
+        scratchCard.state == ScratchCardState.UNSCRATCHED
 }

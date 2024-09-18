@@ -21,6 +21,7 @@ fun ScratchScreen(
 ) {
     val scratchCard = viewModel.scratchCard
     val isScratching = viewModel.isScratching
+    val canBeScratched = viewModel.canBeScratched
 
 
     DisposableEffect(Unit) {
@@ -43,9 +44,15 @@ fun ScratchScreen(
                             viewModel.scratch()
                         }
                     },
-                    enabled = !isScratching
+                    enabled = !isScratching && canBeScratched
                 ) {
-                    Text(text = if (isScratching) "Scratching..." else "Scratch the Card")
+                    Text(text = if (isScratching) {
+                        "Scratching..."
+                    } else if (canBeScratched){
+                        "Scratch the Card"
+                    } else {
+                        "Cannot scratch"
+                    })
                 }
 
                 Text(text = "Scratched Code: ${scratchCard.code}", modifier = Modifier.padding(top = 16.dp))
